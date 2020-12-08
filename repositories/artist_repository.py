@@ -4,7 +4,7 @@ from models.artist import Artist
 from models.album import Album
 
 def save(artist):
-    sql = "INSERT INTO artists name VALUE %s RETURNING *"
+    sql = "INSERT INTO artists (name) VALUES (%s) RETURNING *"
     values = [artist.name]
     results = run_sql(sql, values)
     id = results[0]['id']
@@ -56,6 +56,6 @@ def albums(artist):
     results = run_sql(sql, values)
 
     for row in results:
-        album = Album(row['title', row['genre'], artist, row['id'])
+        album = Album(row['title'], row['genre'], artist, row['id'])
         albums.append(album)
     return albums
